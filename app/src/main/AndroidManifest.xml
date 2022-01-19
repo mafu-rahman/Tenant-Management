@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TenantManagement">
         <activity
-            android:name=".MainActivity2"
+            android:name=".tenantViewMonthly"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

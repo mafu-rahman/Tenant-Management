@@ -3,7 +3,7 @@ package model;
 import java.util.*;
 
 public class Tenant extends Person {
-    String name, flatNo;
+    public String name, flatNo;
     double baseRent, advancePayment, securityDeposit, totalDues;
 
     ArrayList<Time> paidMonths;
@@ -92,5 +92,10 @@ public class Tenant extends Person {
             }
         }
         return -1;
+    }
+
+    public String toString(){
+        String s = "Name: " + this.name + "\n" + "Flat No.: " + this.flatNo;
+        return s;
     }
 }

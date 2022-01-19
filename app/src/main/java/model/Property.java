@@ -40,6 +40,10 @@ public class Property {
         return "Person not present.";
     }
 
+    public ArrayList<Person> getPerson(){
+        return this.person;
+    }
+
     public boolean isPersonPresent(Person p){
         for(int i=0; i<this.person.size(); i++){
             if(p == this.person.get(i))

@@ -4,11 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/TenantManagement/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Users/Abdul Hamid/Desktop/Mafu/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Projects/TenantManagement/app/src/main/res/layout/activity_main2.xml" value="0.2" />
+        <entry key="..\:/Projects/TenantManagement/app/src/main/res/layout/activity_tenant_view_monthly.xml" value="0.190625" />
+        <entry key="..\:/Projects/TenantManagement/app/src/main/res/layout/add_tenant.xml" value="0.176" />
+        <entry key="..\:/Projects/TenantManagement/app/src/main/res/layout/tenant_list.xml" value="0.190625" />
+        <entry key="..\:/Projects/TenantManagement/app/src/main/res/layout/tenant_monthly_details.xml" value="0.190625" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

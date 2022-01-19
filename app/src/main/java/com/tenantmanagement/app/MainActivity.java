@@ -2,20 +2,23 @@ package com.tenantmanagement.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.*;
 import android.widget.Toast;
 import java.util.*;
+
+import model.Person;
 import model.Property;
+import model.Utilities;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView listView;
+    ListView listView, listViewTenants, listViewUtilities;
     ArrayList<Property> properties = new ArrayList<Property>();
-    ArrayAdapter adapter;
+    ArrayAdapter adapter, adapter2, adapter3;
+    int globalPosition;
 
 
 
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listView = (ListView) findViewById(R.id.listProperty);
+        adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, properties);
 
     }
 
@@ -51,18 +55,25 @@ public class MainActivity extends AppCompatActivity {
         return string;
     }
 
+    public void setListView(){
+        adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, properties);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                tenantListWindow(position);
+            }
+        });
+    }
+
 
     public void addProperty(View view) {
         String name = getInputOfTextField(R.id.inputPropertyName);
         String location = getInputOfTextField(R.id.inputLocation);
         properties.add(Property.getInstanceOfProperty(name, location));
         Toast.makeText(getApplicationContext(), "Property added.", Toast.LENGTH_LONG).show();
-        adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, properties);
-        listView.setAdapter(adapter);
-    }
-
-    public void example(View view){
-        Toast.makeText(getApplicationContext(), "Prfrrffrfrfroperty removed.", Toast.LENGTH_LONG).show();
+        setListView();
     }
 
     public void removeProperty(View view) {
@@ -75,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "Property not present.", Toast.LENGTH_LONG).show();
         }
-        adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, properties);
-        listView.setAdapter(adapter);
+        setListView();
     }
 
     public Property findProperty(String name, String location) {
@@ -86,5 +96,49 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return null;
+    }
+
+    public void tenantListWindow(int position){
+        globalPosition = position;
+        setContentView(R.layout.tenant_list);
+        ArrayList<Person> tenants = properties.get(position).getPerson();
+        listViewTenants = (ListView) findViewById(R.id.tenantListView);
+        adapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, tenants);
+
+        listViewTenants.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                tenantMonthlyDetail(position);
+            }
+        });
+    }
+
+    public void addPerson(){
+        String name = getInputOfTextField(R.id.inputTenantName);
+        String phone = getInputOfTextField(R.id.inputTenantPhoneNumber);
+        String flat = getInputOfTextField(R.id.inputFlatNumber);
+        String year = getInputOfTextField(R.id.inputYear);
+        String month = getItemSelected(R.id.inputSpinnerMonth);
+        double baseRent = Double.parseDouble(getInputOfTextField(R.id.inputBaseRent));
+        double advancePayment = Double.parseDouble(getInputOfTextField(R.id.inputAdvancePayment));
+        double securityDeposit = Double.parseDouble(getInputOfTextField(R.id.inputSecurityPayment));
+        String utilityType = getInputOfTextField(R.id.inputUtilityType);
+        double utilityAmount = Double.parseDouble(getInputOfTextField(R.id.inputUtilityAmount));
+        addUtility(name, utilityAmount);
+
+        properties.get(globalPosition).addPerson();
+    }
+
+    public void addUtility(String name, double amount){
+        ArrayList<Utilities> utilities = new ArrayList<>();
+        utilities.add(Utilities.getInstanceOfBill(name, amount));
+    }
+
+
+
+
+
+    public void tenantMonthlyDetail(int position){
+
     }
 }
