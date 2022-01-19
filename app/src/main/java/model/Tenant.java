@@ -1,29 +1,33 @@
 package model;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Tenant extends Person {
-    public String name, flatNo;
+    String name, flatNo, dateJoined;
     double baseRent, advancePayment, securityDeposit, totalDues;
+    int phoneNo;
 
     ArrayList<Time> paidMonths;
     ArrayList<Utilities> utilities;
     Hashtable<Time, Double> monthlyPaidAmount;
 
 
-    private Tenant(String name, String flatNo, double baseRent, double advancePayment, double securityDeposit) {
+    private Tenant(String name, String flatNo, int phoneNo, double baseRent, double advancePayment, double securityDeposit, String dateJoined) {
         this.name = name;
         this.flatNo = flatNo;
+        this.phoneNo = phoneNo;
         this.baseRent = baseRent;
         this.advancePayment = advancePayment;
         this.securityDeposit = securityDeposit;
         this.utilities = new ArrayList<Utilities>();
         this.monthlyPaidAmount = new Hashtable<Time, Double>();
         this.paidMonths = new ArrayList<Time>();
+        this.dateJoined = dateJoined;
     }
 
-    public static Tenant getInstanceOfTenant(String name, String flatNo, double baseRent, double advancePayment, double securityDeposit) {
-        return new Tenant(name, flatNo, baseRent, advancePayment, securityDeposit);
+    public static Tenant getInstanceOfTenant(String name, String flatNo,int phoneNo, double baseRent, double advancePayment, double securityDeposit, String dateJoined) {
+        return new Tenant(name, flatNo,phoneNo, baseRent, advancePayment, securityDeposit, dateJoined);
     }
 
     public double getBaseRent(){
@@ -36,6 +40,12 @@ public class Tenant extends Person {
 
     public void addUtility(Utilities u){
         this.utilities.add(u);
+    }
+
+    public void addUtility(ArrayList<Utilities> u){
+        for(int i=0; i<u.size(); i++){
+            this.utilities.add(u.get(i));
+        }
     }
 
     public double getTotalUtilities(){
@@ -92,6 +102,10 @@ public class Tenant extends Person {
             }
         }
         return -1;
+    }
+
+    public String getDateJoined(){
+        return dateJoined;
     }
 
     public String toString(){

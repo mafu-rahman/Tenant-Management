@@ -11,12 +11,14 @@ import java.util.*;
 
 import model.Person;
 import model.Property;
+import model.Tenant;
 import model.Utilities;
 
 public class MainActivity extends AppCompatActivity {
 
     ListView listView, listViewTenants, listViewUtilities;
     ArrayList<Property> properties = new ArrayList<Property>();
+    ArrayList<Utilities> utilities = new ArrayList<>();
     ArrayAdapter adapter, adapter2, adapter3;
     int globalPosition;
 
@@ -67,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void setListViewUtilities(){
+        adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, utilities);
+        listView.setAdapter(adapter);
+    }
+
 
     public void addProperty(View view) {
         String name = getInputOfTextField(R.id.inputPropertyName);
@@ -113,25 +120,32 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void addPerson(){
+    public void addButtonClicked(View view){
+        setContentView(R.layout.add_tenant);
+    }
+
+    public void addPerson(View view){
         String name = getInputOfTextField(R.id.inputTenantName);
-        String phone = getInputOfTextField(R.id.inputTenantPhoneNumber);
+        int phone = Integer.parseInt(getInputOfTextField(R.id.inputTenantPhoneNumber));
         String flat = getInputOfTextField(R.id.inputFlatNumber);
-        String year = getInputOfTextField(R.id.inputYear);
+        int year = Integer.parseInt(getInputOfTextField(R.id.inputYear));
         String month = getItemSelected(R.id.inputSpinnerMonth);
         double baseRent = Double.parseDouble(getInputOfTextField(R.id.inputBaseRent));
         double advancePayment = Double.parseDouble(getInputOfTextField(R.id.inputAdvancePayment));
         double securityDeposit = Double.parseDouble(getInputOfTextField(R.id.inputSecurityPayment));
-        String utilityType = getInputOfTextField(R.id.inputUtilityType);
-        double utilityAmount = Double.parseDouble(getInputOfTextField(R.id.inputUtilityAmount));
-        addUtility(name, utilityAmount);
-
-        properties.get(globalPosition).addPerson();
+        Tenant p = Tenant.getInstanceOfTenant(name, flat, phone, baseRent, advancePayment, securityDeposit, (month + " " + year));
+        p.addUtility(utilities);
+        properties.get(globalPosition).addPerson(p);
+        utilities.clear();
+        setContentView(R.layout.tenant_list);
+        tenantListWindow(globalPosition);
     }
 
-    public void addUtility(String name, double amount){
-        ArrayList<Utilities> utilities = new ArrayList<>();
-        utilities.add(Utilities.getInstanceOfBill(name, amount));
+    public void addUtility(View view){
+        String utilityType = getInputOfTextField(R.id.inputUtilityType);
+        double utilityAmount = Double.parseDouble(getInputOfTextField(R.id.inputUtilityAmount));
+        utilities.add(Utilities.getInstanceOfBill(utilityType, utilityAmount));
+        setListViewUtilities();
     }
 
 
@@ -139,6 +153,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void tenantMonthlyDetail(int position){
-
+        setContentView(R.layout.tenant_monthly_details);
     }
 }
