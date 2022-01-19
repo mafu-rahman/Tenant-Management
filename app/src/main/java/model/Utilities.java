@@ -21,4 +21,8 @@ public class Utilities {
         return this.amount;
     }
 
+    public String toString(){
+        return this.name + ": amount: " + this.amount;
+    }
+
 }

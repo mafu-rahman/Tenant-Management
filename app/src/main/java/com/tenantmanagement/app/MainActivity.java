@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView listView, listViewTenants, listViewUtilities;
     ArrayList<Property> properties = new ArrayList<Property>();
+    ArrayList<Person> tenants = new ArrayList<>();
     ArrayList<Utilities> utilities = new ArrayList<>();
     ArrayAdapter adapter, adapter2, adapter3;
     int globalPosition;
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listProperty);
         adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, properties);
-
     }
 
     /* this mutator sets the output label */
@@ -70,8 +70,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setListViewUtilities(){
-        adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, utilities);
-        listView.setAdapter(adapter);
+        listViewUtilities = (ListView) findViewById(R.id.listViewUtilities);
+        adapter3 = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, utilities);
+        listViewUtilities.setAdapter(adapter3);
     }
 
 
@@ -108,9 +109,10 @@ public class MainActivity extends AppCompatActivity {
     public void tenantListWindow(int position){
         globalPosition = position;
         setContentView(R.layout.tenant_list);
-        ArrayList<Person> tenants = properties.get(position).getPerson();
+        tenants = properties.get(position).getPerson();
         listViewTenants = (ListView) findViewById(R.id.tenantListView);
         adapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, tenants);
+        listViewTenants.setAdapter(adapter2);
 
         listViewTenants.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -120,11 +122,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void addButtonClicked(View view){
+    public void addTenantButtonClicked(View view){
         setContentView(R.layout.add_tenant);
     }
 
-    public void addPerson(View view){
+    public void confirmButtonCLicked(View view){
         String name = getInputOfTextField(R.id.inputTenantName);
         int phone = Integer.parseInt(getInputOfTextField(R.id.inputTenantPhoneNumber));
         String flat = getInputOfTextField(R.id.inputFlatNumber);
@@ -137,11 +139,10 @@ public class MainActivity extends AppCompatActivity {
         p.addUtility(utilities);
         properties.get(globalPosition).addPerson(p);
         utilities.clear();
-        setContentView(R.layout.tenant_list);
         tenantListWindow(globalPosition);
     }
 
-    public void addUtility(View view){
+    public void addUtilityButtonCLicked(View view){
         String utilityType = getInputOfTextField(R.id.inputUtilityType);
         double utilityAmount = Double.parseDouble(getInputOfTextField(R.id.inputUtilityAmount));
         utilities.add(Utilities.getInstanceOfBill(utilityType, utilityAmount));
