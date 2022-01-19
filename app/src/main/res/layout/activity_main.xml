@@ -33,23 +33,25 @@
 
     <EditText
         android:id="@+id/inputPropertyName"
-        android:layout_width="211dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="208dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
         android:id="@+id/inputLocation"
-        android:layout_width="210dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="209dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPropertyName" />
 
@@ -85,6 +87,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="28dp"
+        android:onClick="addProperty"
         android:text="Add"
         app:layout_constraintEnd_toStartOf="@+id/buttonRemove"
         app:layout_constraintHorizontal_bias="0.016"
@@ -95,20 +98,26 @@
         android:id="@+id/buttonRemove"
         android:layout_width="133dp"
         android:layout_height="41dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="52dp"
+        android:onClick="removeProperty"
         android:text="Remove"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputLocation" />
 
     <ListView
         android:id="@+id/listProperty"
-        android:layout_width="407dp"
-        android:layout_height="480dp"
+        android:layout_width="396dp"
+        android:layout_height="477dp"
         android:layout_marginEnd="4dp"
+        android:animationCache="false"
+        android:backgroundTint="#090909"
+        android:fadingEdge="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAdd" />
+        app:layout_constraintTop_toBottomOf="@+id/inputLocation"
+        app:layout_constraintVertical_bias="0.946" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

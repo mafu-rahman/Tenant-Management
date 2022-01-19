@@ -47,4 +47,9 @@ public class Property {
         }
         return false;
     }
+
+    public String toString(){
+        String s = "Property ID: " + this.getName() + "\n" + "Location: " + this.getLocation();
+        return s;
+    }
 }
