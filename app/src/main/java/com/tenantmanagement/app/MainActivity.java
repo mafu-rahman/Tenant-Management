@@ -61,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
+    public void example(View view){
+        Toast.makeText(getApplicationContext(), "Prfrrffrfrfroperty removed.", Toast.LENGTH_LONG).show();
+    }
+
     public void removeProperty(View view) {
         String name = getInputOfTextField(R.id.inputPropertyName);
         String location = getInputOfTextField(R.id.inputLocation);
