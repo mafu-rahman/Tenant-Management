@@ -2,13 +2,11 @@ package com.tenantmanagement.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import android.widget.Toast;
 import java.util.*;
-
 import model.Person;
 import model.Property;
 import model.Tenant;
@@ -16,8 +14,9 @@ import model.Utilities;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView listView, listViewTenants, listViewUtilities;
-    ArrayList<Property> properties = new ArrayList<Property>();
+    ListView listView, listViewTenants, listViewUtilities;  // for listing items in listview
+    ArrayList<Property> properties = new ArrayList<Property>(); // this arraylist contains all the properties that the user creates
+
     ArrayList<Person> tenants = new ArrayList<>();
     ArrayList<Utilities> utilities = new ArrayList<>();
     ArrayAdapter adapter, adapter2, adapter3;
@@ -108,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void tenantListWindow(int position){
         globalPosition = position;
-        setContentView(R.layout.tenant_list);
+        setContentView(R.layout.activity_tenant_list);
         tenants = properties.get(position).getPerson();
         listViewTenants = (ListView) findViewById(R.id.tenantListView);
         adapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, tenants);
@@ -123,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addTenantButtonClicked(View view){
-        setContentView(R.layout.add_tenant);
+        setContentView(R.layout.activity_add_tenant);
     }
 
     public void confirmButtonCLicked(View view){
@@ -154,6 +153,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void tenantMonthlyDetail(int position){
-        setContentView(R.layout.tenant_monthly_details);
+        setContentView(R.layout.activity_tenant_monthly_details);
     }
 }
