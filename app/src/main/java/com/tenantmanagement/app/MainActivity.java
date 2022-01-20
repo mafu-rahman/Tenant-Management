@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.*;
+
+import model.GlobalVariables;
 import model.Person;
 import model.Property;
 import model.Tenant;
@@ -18,13 +20,8 @@ import model.Utilities;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView listView, listViewTenants, listViewUtilities;  // for listing items in listview
-    ArrayList<Property> properties = new ArrayList<Property>(); // this arraylist contains all the properties that the user creates
-
-    ArrayList<Utilities> utilities = new ArrayList<>();
+    ListView listView;  // for listing items in listview
     ArrayAdapter adapter;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +41,14 @@ public class MainActivity extends AppCompatActivity {
     /* this method updates the contents of property list */
     public void setListViewProperties(){
         listView = (ListView) findViewById(R.id.listProperty);
-        adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, properties);
+        adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, GlobalVariables.properties);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this,TenantList.class);
-
+                intent.putExtra("index", position);
                 startActivity(intent);
             }
         });
@@ -60,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     public void addPropertyButtonCLicked(View view) {
         String name = getInputOfTextField(R.id.inputPropertyName);
         String location = getInputOfTextField(R.id.inputLocation);
-        properties.add(Property.getInstanceOfProperty(name, location));
+        GlobalVariables.properties.add(Property.getInstanceOfProperty(name, location));
         Toast.makeText(getApplicationContext(), "Property added.", Toast.LENGTH_SHORT).show();
         setListViewProperties();
     }
@@ -70,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         String location = getInputOfTextField(R.id.inputLocation);
         Property p = findProperty(name, location);
         if (p != null) {
-            properties.remove(p);
+            GlobalVariables.properties.remove(p);
             Toast.makeText(getApplicationContext(), "Property removed.", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "Property not present.", Toast.LENGTH_SHORT).show();
@@ -79,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public Property findProperty(String name, String location) {
-        for (int i = 0; i < properties.size(); i++) {
-            if (properties.get(i).getName().equals(name) && properties.get(i).getLocation().equals(location)) {
-                return (properties.get(i));
+        for (int i = 0; i < GlobalVariables.properties.size(); i++) {
+            if (GlobalVariables.properties.get(i).getName().equals(name) && GlobalVariables.properties.get(i).getLocation().equals(location)) {
+                return (GlobalVariables.properties.get(i));
             }
         }
         return null;

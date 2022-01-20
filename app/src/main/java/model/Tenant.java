@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.*;
 
-public class Tenant extends Person {
+public class Tenant extends Person implements Serializable {
     String name, flatNo, dateJoined;
     double baseRent, advancePayment, securityDeposit, totalDues;
     int phoneNo;

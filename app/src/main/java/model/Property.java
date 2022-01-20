@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Property {
+public class Property implements Serializable {
     String name, location;
     ArrayList<Person> person;
 

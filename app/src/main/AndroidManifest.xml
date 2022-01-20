@@ -11,12 +11,15 @@
         android:theme="@style/Theme.TenantManagement">
         <activity
             android:name=".TenantView"
+            android:parentActivityName=".TenantView"
             android:exported="false" />
         <activity
             android:name=".TenantList"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTask"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
