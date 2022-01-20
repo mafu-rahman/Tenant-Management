@@ -2,24 +2,24 @@ package model;
 
 public class Time {
 
-    int month;
+    String month;
     int year;
 
-    private Time(int month, int year){
+    private Time(String month, int year){
         this.month = month;
         this.year = year;
 
     }
 
-    public static Time getInstanceOfTime(int month, int year){
+    public static Time getInstanceOfTime(String month, int year){
         return new Time(month, year);
     }
 
-    public int getMonth(){
+    public String getMonth(){
         return this.month;
     }
 
-    public void setMonth(int month){
+    public void setMonth(String month){
         this.month = month;
     }
 
@@ -32,7 +32,7 @@ public class Time {
     }
 
     public boolean equals(Time t) {
-        if(this.month == t.month && this.year == t.year)
+        if(this.month.equals(t.month) && this.year == t.year)
             return true;
         return false;
     }

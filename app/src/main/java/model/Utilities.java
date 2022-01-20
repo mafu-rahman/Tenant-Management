@@ -22,7 +22,7 @@ public class Utilities {
     }
 
     public String toString(){
-        return this.name + ": amount: " + this.amount;
+        return this.name + ": " + this.amount;
     }
 
 }

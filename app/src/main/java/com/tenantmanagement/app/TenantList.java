@@ -1,26 +1,20 @@
 package com.tenantmanagement.app;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ComponentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toolbar;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import model.GlobalVariables;
-import model.Person;
-import model.Property;
 import model.Tenant;
 import model.Utilities;
 
@@ -35,15 +29,6 @@ public class TenantList extends AppCompatActivity implements Serializable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tenant_list);
-
-        // Remove Later ----------
-        Tenant p = Tenant.getInstanceOfTenant("name", "flat", 123, 123, 123, 123, ("1" + " " + "2022"));
-        utilities.add(Utilities.getInstanceOfBill("utilityType", 123));
-        utilities.add(Utilities.getInstanceOfBill("utilityType2", 345));
-        p.addUtility(utilities);
-        GlobalVariables.properties.get(index).addPerson(p);
-        utilities.clear();
-        // ------------
 
         Intent intent = getIntent();
         if(intent.hasExtra("index")){
@@ -112,7 +97,7 @@ public class TenantList extends AppCompatActivity implements Serializable {
         double advancePayment = Double.parseDouble(getInputOfTextField(R.id.inputAdvancePayment));
         double securityDeposit = Double.parseDouble(getInputOfTextField(R.id.inputSecurityPayment));
 
-        Tenant p = Tenant.getInstanceOfTenant(name, flat, phone, baseRent, advancePayment, securityDeposit, (month + " " + year));
+        Tenant p = Tenant.getInstanceOfTenant(name, flat, phone, baseRent, advancePayment, securityDeposit, (month + ", " + year));
         p.addUtility(utilities);
         GlobalVariables.properties.get(index).addPerson(p);
         utilities.clear();

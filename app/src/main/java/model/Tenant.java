@@ -64,6 +64,18 @@ public class Tenant extends Person implements Serializable {
         return total;
     }
 
+    public String getName(){ return this.name; }
+
+    public String getFlatNo(){ return this.flatNo; }
+
+    public int getPhoneNo(){ return this.phoneNo; }
+
+    public String getDateJoined(){
+        return dateJoined;
+    }
+
+    public ArrayList<Utilities> getUtilities(){ return this.utilities; }
+
     public double getTotalRent(){
         return (getBaseRent() + getTotalUtilities());
     }
@@ -112,9 +124,6 @@ public class Tenant extends Person implements Serializable {
         return -1;
     }
 
-    public String getDateJoined(){
-        return dateJoined;
-    }
 
     public String toString(){
         String s = "Name: " + this.name + "\n" + "Flat No.: " + this.flatNo;

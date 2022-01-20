@@ -4,17 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import model.GlobalVariables;
 import model.Tenant;
+import model.Time;
 
 public class TenantView extends AppCompatActivity {
 
     Tenant tenant;
     int indexProperty, indexTenant;
+
+    ListView listView;
+    ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +31,14 @@ public class TenantView extends AppCompatActivity {
         indexProperty = (Integer) getIntent().getIntExtra("property", 0);
         indexTenant = (Integer) getIntent().getIntExtra("tenant", 0);
         tenant = (Tenant) GlobalVariables.properties.get(indexProperty).getPerson().get(indexTenant);
+
+        setListViewUtilities();
+    }
+
+    public void setListViewUtilities() {
+        listView = (ListView) findViewById(R.id.listViewUtilitiesTenantInfo);
+        adapter = new ArrayAdapter(TenantView.this, android.R.layout.simple_list_item_1, tenant.getUtilities());
+        listView.setAdapter(adapter);
     }
 
     /* this mutator changes contents of text field */
@@ -49,7 +64,32 @@ public class TenantView extends AppCompatActivity {
         return string;
     }
 
+    public void onButtonViewInfoClicked(View view){
+        String month = getItemSelected(R.id.inputSpinnerMonthView);
+        int year = Integer.parseInt(getInputOfTextField(R.id.inputYearView));
+        Time time = Time.getInstanceOfTime(month,year);
 
+        setContentsOfTextView(R.id.outputName, tenant.getName());
+        setContentsOfTextView(R.id.outputContact, tenant.getPhoneNo()+"");
+        setContentsOfTextView(R.id.outputFlat, tenant.getFlatNo());
+        setContentsOfTextView(R.id.outputDateJoined, tenant.getDateJoined());
+        setContentsOfTextView(R.id.outputBaseRent, tenant.getBaseRent()+"");
+        setContentsOfTextView(R.id.outputTotalUtilities, tenant.getTotalUtilities()+"");
+        setContentsOfTextView(R.id.outputTotalRent, tenant.getTotalRent()+"");
+        if (tenant.getAmountPaidMonth(time) != -1.0)
+            setContentsOfTextView(R.id.outputAmountPaid, tenant.getAmountPaidMonth(time)+"");
+        setContentsOfTextView(R.id.outputRemainingAmount, tenant.getRemainingDues(time)+"");
+    }
+
+    public void onButtonPayRentClicked(View view){
+        String month = getItemSelected(R.id.inputSpinnerMonthView);
+        int year = Integer.parseInt(getInputOfTextField(R.id.inputYearView));
+        Time time = Time.getInstanceOfTime(month,year);
+
+        double amount = Double.parseDouble(getInputOfTextField(R.id.inputPayRent));
+        tenant.payRent(amount, time);
+        onButtonViewInfoClicked(view.findViewById(R.id.buttonViewInfo));
+    }
 
 
 }
