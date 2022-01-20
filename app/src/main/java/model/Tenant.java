@@ -13,6 +13,9 @@ public class Tenant extends Person {
     Hashtable<Time, Double> monthlyPaidAmount;
 
 
+    private Tenant(){
+    }
+
     private Tenant(String name, String flatNo, int phoneNo, double baseRent, double advancePayment, double securityDeposit, String dateJoined) {
         this.name = name;
         this.flatNo = flatNo;
@@ -28,6 +31,10 @@ public class Tenant extends Person {
 
     public static Tenant getInstanceOfTenant(String name, String flatNo,int phoneNo, double baseRent, double advancePayment, double securityDeposit, String dateJoined) {
         return new Tenant(name, flatNo,phoneNo, baseRent, advancePayment, securityDeposit, dateJoined);
+    }
+
+    public static Tenant getInstanceOfTenant(){
+        return new Tenant();
     }
 
     public double getBaseRent(){

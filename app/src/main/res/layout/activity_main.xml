@@ -75,7 +75,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="28dp"
-        android:onClick="addProperty"
+        android:onClick="addPropertyButtonCLicked"
         android:text="Add"
         app:layout_constraintEnd_toStartOf="@+id/buttonRemove"
         app:layout_constraintHorizontal_bias="0.016"
@@ -88,7 +88,7 @@
         android:layout_height="41dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="52dp"
-        android:onClick="removeProperty"
+        android:onClick="removePropertyButtonClicked"
         android:text="Remove"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputLocation" />

@@ -56,4 +56,8 @@ public class Property {
         String s = "Property ID: " + this.getName() + "\n" + "Location: " + this.getLocation();
         return s;
     }
+
+    public Property getProperty(){
+        return this;
+    }
 }
