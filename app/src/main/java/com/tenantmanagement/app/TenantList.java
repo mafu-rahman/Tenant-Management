@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -60,6 +62,8 @@ public class TenantList extends AppCompatActivity implements Serializable {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(TenantList.this, TenantView.class);
+                intent.putExtra("property", index);
+                intent.putExtra("tenant", position);
                 startActivity(intent);
             }
         });
