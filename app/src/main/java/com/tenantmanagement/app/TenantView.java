@@ -76,8 +76,12 @@ public class TenantView extends AppCompatActivity {
         setContentsOfTextView(R.id.outputBaseRent, tenant.getBaseRent()+"");
         setContentsOfTextView(R.id.outputTotalUtilities, tenant.getTotalUtilities()+"");
         setContentsOfTextView(R.id.outputTotalRent, tenant.getTotalRent()+"");
+
         if (tenant.getAmountPaidMonth(time) != -1.0)
             setContentsOfTextView(R.id.outputAmountPaid, tenant.getAmountPaidMonth(time)+"");
+        else
+            setContentsOfTextView(R.id.outputAmountPaid, "Not Paid");
+
         setContentsOfTextView(R.id.outputRemainingAmount, tenant.getRemainingDues(time)+"");
     }
 
