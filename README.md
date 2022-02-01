@@ -6,4 +6,4 @@ Features: It accepts inputs of various statistical data of tenants ranging from 
 It lets the user keep log of tenants' monthly payments.
 It can take in data of various properties.
 
-Screenshots:
+Screenshots: https://github.com/mafu-rahman/Tenant-Management/tree/master/Screenshots
