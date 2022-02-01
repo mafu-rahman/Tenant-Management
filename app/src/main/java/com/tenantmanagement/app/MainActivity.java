@@ -4,19 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.*;
 import android.widget.Toast;
 
-import java.io.Serializable;
-import java.util.*;
-
 import model.GlobalVariables;
-import model.Person;
 import model.Property;
-import model.Tenant;
-import model.Utilities;
 
 public class MainActivity extends AppCompatActivity {
 
